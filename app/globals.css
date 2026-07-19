@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Kalam", cursive;
   --font-body: "Inter", sans-serif;
   --font-jp: "Noto Sans JP", sans-serif;
-  --font-mono: "Space Mono", monospace;
+  --font-mono: "Inter", sans-serif;
 }
 
 html,
 body {
-  background-color: #14172b;
-  color: #f5f3ee;
+  background-color: #F1EDE3;
+  color: #2E2A22;
 }
 
 body {
@@ -20,13 +20,13 @@ body {
 }
 
 ::selection {
-  background-color: #f2a65a;
-  color: #14172b;
+  background-color: #FFDD57;
+  color: #2E2A22;
 }
 
 /* visible keyboard focus, kept subtle but never removed */
 :focus-visible {
-  outline: 2px solid #7fd9c4;
+  outline: 2px solid #2F9C82;
   outline-offset: 2px;
 }
 

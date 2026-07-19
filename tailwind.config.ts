@@ -8,20 +8,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: "#14172B",
-        surface: "#1E2240",
-        surface2: "#262B52",
-        amber: "#F2A65A",
-        mint: "#7FD9C4",
-        ink: "#F5F3EE",
-        muted: "#9497B8",
-        line: "#343A66",
+        night: "#2E2A22",   // dark ink, used as text atop bright accent buttons
+        surface: "#FFFFFF", // card background
+        surface2: "#F6F1E4", // secondary panel / input background
+        amber: "#F2A65A",   // highlight accent (tags, primary buttons)
+        mint: "#2F9C82",    // secondary accent (links, success)
+        ink: "#2E2A22",     // primary text
+        muted: "#8C8573",   // secondary text
+        line: "#E4DBC8",    // borders
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
+        display: ["var(--font-display)", "cursive"],
         body: ["var(--font-body)", "sans-serif"],
         jp: ["var(--font-jp)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        mono: ["var(--font-mono)", "sans-serif"],
       },
       borderRadius: {
         frame: "22px",
