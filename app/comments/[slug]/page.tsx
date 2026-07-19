@@ -4,14 +4,14 @@ import BackButton from "@/components/BackButton";
 import VocabBlock from "@/components/VocabBlock";
 import SaveButton from "@/components/SaveButton";
 import { RegisterTag, PlatformTag } from "@/components/TagPill";
-import { getCommentBySlug } from "@/lib/mock-data";
+import { getCommentBySlug } from "@/lib/comments";
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}): Metadata {
-  const comment = getCommentBySlug(params.slug);
+}): Promise<Metadata> {
+  const comment = await getCommentBySlug(params.slug);
   if (!comment) return {};
   return {
     title: `"${comment.studySentence}" — TikTok English`,
@@ -19,12 +19,12 @@ export function generateMetadata({
   };
 }
 
-export default function CommentDetailPage({
+export default async function CommentDetailPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const comment = getCommentBySlug(params.slug);
+  const comment = await getCommentBySlug(params.slug);
   if (!comment) notFound();
 
   return (
