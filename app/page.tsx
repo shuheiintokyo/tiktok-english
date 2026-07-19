@@ -2,6 +2,10 @@ import CommentCard from "@/components/CommentCard";
 import Pagination from "@/components/Pagination";
 import { getPagedComments } from "@/lib/comments";
 
+// Always fetch fresh from Supabase - never serve a cached snapshot,
+// since new comments arrive continuously via the Notion pipeline.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -30,4 +34,3 @@ export default async function HomePage({
     </div>
   );
 }
-

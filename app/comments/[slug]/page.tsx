@@ -7,6 +7,9 @@ import { RegisterTag, PlatformTag } from "@/components/TagPill";
 import { getCommentBySlug } from "@/lib/comments";
 import LogView from "@/components/LogView";
 
+// Always fetch fresh from Supabase - never serve a cached snapshot.
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {
