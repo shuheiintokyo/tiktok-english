@@ -29,6 +29,14 @@ export default async function HomePage({
     .order("created_at", { ascending: false })
     .range(0, 9);
 
+  // TEMPORARY DEBUG - same minimal select as `raw`, but with .range() added,
+  // to isolate whether .range() itself is the cause (independent of select *)
+  const raw3 = await supabase
+    .from("comments")
+    .select("slug, created_at", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(0, 9);
+
   const debugInfo = {
     supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
     slugOrder: items.map((c) => c.slug),
@@ -42,6 +50,11 @@ export default async function HomePage({
     raw2Slugs: raw2.data?.map((d: any) => d.slug),
     raw2Error: raw2.error,
     raw2Status: raw2.status,
+    raw3Count: raw3.count,
+    raw3DataLength: raw3.data?.length,
+    raw3Slugs: raw3.data?.map((d: any) => d.slug),
+    raw3Error: raw3.error,
+    raw3Status: raw3.status,
   };
 
   return (
