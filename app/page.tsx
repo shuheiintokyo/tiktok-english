@@ -21,6 +21,14 @@ export default async function HomePage({
     .select("slug, created_at", { count: "exact" })
     .order("created_at", { ascending: false });
 
+  // TEMPORARY DEBUG - exact replica of getPagedComments's query, to isolate
+  // whether select("*") or .range() is what causes the discrepancy
+  const raw2 = await supabase
+    .from("comments")
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(0, 9);
+
   const debugInfo = {
     supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
     slugOrder: items.map((c) => c.slug),
@@ -29,6 +37,11 @@ export default async function HomePage({
     rawData: raw.data,
     rawError: raw.error,
     rawStatus: raw.status,
+    raw2Count: raw2.count,
+    raw2DataLength: raw2.data?.length,
+    raw2Slugs: raw2.data?.map((d: any) => d.slug),
+    raw2Error: raw2.error,
+    raw2Status: raw2.status,
   };
 
   return (
