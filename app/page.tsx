@@ -14,8 +14,17 @@ export default async function HomePage({
   const page = Math.max(1, Number(searchParams.page ?? "1") || 1);
   const { items, totalPages } = await getPagedComments(page);
 
+  // TEMPORARY DEBUG - remove once the ordering issue is resolved
+  const debugInfo = {
+    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    slugOrder: items.map((c) => c.slug),
+  };
+
   return (
     <div>
+      <pre className="mb-4 whitespace-pre-wrap break-all rounded-lg border border-red-400 bg-red-950 p-3 text-[10px] text-red-200">
+        {JSON.stringify(debugInfo, null, 2)}
+      </pre>
       <p className="mb-6 font-jp text-sm text-muted">
         今日の一文。電車の中や隙間時間で、3〜5分で読める本物の英語表現。
       </p>
