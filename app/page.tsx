@@ -1,6 +1,7 @@
 import CommentCard from "@/components/CommentCard";
 import Pagination from "@/components/Pagination";
 import { getPagedComments } from "@/lib/comments";
+import { supabase } from "@/lib/supabase";
 
 // Always fetch fresh from Supabase - never serve a cached snapshot,
 // since new comments arrive continuously via the Notion pipeline.
@@ -14,10 +15,20 @@ export default async function HomePage({
   const page = Math.max(1, Number(searchParams.page ?? "1") || 1);
   const { items, totalPages } = await getPagedComments(page);
 
-  // TEMPORARY DEBUG - remove once the ordering issue is resolved
+  // TEMPORARY DEBUG - raw, unprocessed query straight from the client library
+  const raw = await supabase
+    .from("comments")
+    .select("slug, created_at", { count: "exact" })
+    .order("created_at", { ascending: false });
+
   const debugInfo = {
     supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
     slugOrder: items.map((c) => c.slug),
+    rawCount: raw.count,
+    rawDataLength: raw.data?.length,
+    rawData: raw.data,
+    rawError: raw.error,
+    rawStatus: raw.status,
   };
 
   return (
