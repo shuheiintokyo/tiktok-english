@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AUTH_ENABLED } from "@/lib/config";
 
 export default function SiteHeader() {
   return (
@@ -12,12 +13,25 @@ export default function SiteHeader() {
         </span>
       </Link>
       <nav className="flex items-center gap-4 font-mono text-xs uppercase tracking-wide text-muted">
-        <Link href="/word-book" className="hover:text-mint">
-          Word book
-        </Link>
-        <Link href="/quiz" className="hover:text-mint">
-          Quiz
-        </Link>
+        {AUTH_ENABLED ? (
+          <>
+            <Link href="/word-book" className="hover:text-mint">
+              Word book
+            </Link>
+            <Link href="/quiz" className="hover:text-mint">
+              Quiz
+            </Link>
+          </>
+        ) : (
+          <>
+            <span className="cursor-not-allowed opacity-40" title="Coming soon">
+              Word book
+            </span>
+            <span className="cursor-not-allowed opacity-40" title="Coming soon">
+              Quiz
+            </span>
+          </>
+        )}
       </nav>
     </header>
   );

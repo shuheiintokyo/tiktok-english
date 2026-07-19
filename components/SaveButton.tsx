@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
+import { AUTH_ENABLED } from "@/lib/config";
 
 export default function SaveButton({
   label,
@@ -16,6 +17,18 @@ export default function SaveButton({
   const router = useRouter();
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
+
+  if (!AUTH_ENABLED) {
+    return (
+      <button
+        disabled
+        title="Sign-in coming soon"
+        className="cursor-not-allowed rounded-full border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-muted opacity-40"
+      >
+        {label} (soon)
+      </button>
+    );
+  }
 
   async function handleClick() {
     if (!user) {
