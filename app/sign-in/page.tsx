@@ -13,7 +13,9 @@ export default function SignInPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
-    const { error } = await supabase.auth.signInWithOtp({ email });
+    const { error } = await supabase.auth.signInWithOtp({email,
+    options: { emailRedirectTo: window.location.origin },
+    });
     if (error) {
       setStatus("error");
       setErrorMessage(error.message);

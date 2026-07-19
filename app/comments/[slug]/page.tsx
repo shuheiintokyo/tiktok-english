@@ -5,6 +5,7 @@ import VocabBlock from "@/components/VocabBlock";
 import SaveButton from "@/components/SaveButton";
 import { RegisterTag, PlatformTag } from "@/components/TagPill";
 import { getCommentBySlug } from "@/lib/comments";
+import LogView from "@/components/LogView";
 
 export async function generateMetadata({
   params,
@@ -29,6 +30,7 @@ export default async function CommentDetailPage({
 
   return (
     <div>
+      <LogView commentId={comment.id} />
       <BackButton />
 
       <div className="mt-4 rounded-frame border border-line bg-surface p-6">
@@ -53,7 +55,10 @@ export default async function CommentDetailPage({
         )}
 
         <div className="mt-5">
-          <SaveButton label="Save sentence to word book" />
+          <SaveButton
+            label="Save all words in this sentence"
+            vocabItemIds={comment.vocabItems.map((v) => v.id)}
+          />
         </div>
       </div>
 

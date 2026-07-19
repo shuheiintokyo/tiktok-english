@@ -36,7 +36,7 @@ export default function VocabBlock({ item }: { item: VocabItem }) {
             <p className="font-jp text-xs text-muted">{item.notes}</p>
           )}
           <div className="pt-1">
-            <SaveButton label="Save to word book" />
+            <SaveButton label="Save to word book" vocabItemIds={[item.id]} />
           </div>
         </div>
       )}
