@@ -60,10 +60,13 @@ export async function getPagedComments(
   const to = from + PAGE_SIZE - 1;
 
   const { data, count, error } = await supabase
-    .from("comments")
-    .select("*", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range(from, to);
+  .from("comments")
+  .select(
+    "id, notion_page_id, source_platform, slug, study_sentence, meaning_ja, background_note_ja, region_availability, register, created_at",
+    { count: "exact" }
+  )
+  .order("created_at", { ascending: false })
+  .range(from, to);
 
   if (error) {
     console.error("getPagedComments error:", error.message);
